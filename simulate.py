@@ -138,7 +138,16 @@ def main():
             draw(graph, deck, deck_list)
 
         if event == "See Deck":
-            print(deck)
+            table = []
+            for i in set(deck_list):
+                table.append([i, deck[i][0]])
+            l = [[sg.Table(table, headings=["ポケモン", "枚数"])]]
+            deck_window = sg.Window("デッキを確認", l, finalize=True, size=(200, 200))
+            while True:
+                deck_event, deck_value = deck_window.read()
+                if deck_event is None:
+                    break
+            deck_window.close()
 
         if event == "Pick 1 card":
             card_name = sg.PopupGetText('デッキから持ってくるカード名を入力してください')
