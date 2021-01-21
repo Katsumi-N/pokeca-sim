@@ -7,7 +7,7 @@ import random
 from pokeca_scraping import scraping
 
 def start(graph, deck_copy, deck_list_copy):
-    deck = deck_copy
+    deck = deck_copy.copy()
     deck_list = deck_list_copy[:]
     random.shuffle(deck_list)
 
@@ -36,7 +36,28 @@ def draw(graph, deck, deck_list):
     deck[draw_card][0] -= 1
     graph.draw_image(filename=deck[draw_card][2], location=(680, 230))
 
+def graph_(window):
+    # get the graph element for ease of use later
+    graph = window["-GRAPH-"]  # type: sg.Graph
 
+    graph.draw_text("手札", (370, 120))
+    graph.draw_rectangle((100, 130),(650, 10))
+
+    graph.draw_text("サイド", (170, 410))
+    graph.draw_rectangle((100, 430), (250, 150))
+
+    graph.draw_text("ベンチ", (450, 280))
+    graph.draw_rectangle((260, 300), (650, 150))
+
+    graph.draw_text("バトル場", (440, 400))
+    graph.draw_rectangle((400, 410), (480, 310))
+
+    graph.draw_text("トラッシュ", (710, 120))
+    graph.draw_rectangle((670, 130), (750, 10))
+
+    graph.draw_text("山札", (710, 270))
+    graph.draw_rectangle((670, 280), (750, 150))
+    return graph
 
 def main():
     parser = argparse.ArgumentParser()
@@ -68,26 +89,7 @@ def main():
 
     window = sg.Window("Pokemon-card simulator", layout, finalize=True)
 
-    # get the graph element for ease of use later
-    graph = window["-GRAPH-"]  # type: sg.Graph
-
-    graph.draw_text("手札", (370, 120))
-    graph.draw_rectangle((100, 130),(650, 10))
-
-    graph.draw_text("サイド", (170, 410))
-    graph.draw_rectangle((100, 430), (250, 150))
-
-    graph.draw_text("ベンチ", (450, 280))
-    graph.draw_rectangle((260, 300), (650, 150))
-
-    graph.draw_text("バトル場", (440, 400))
-    graph.draw_rectangle((400, 410), (480, 310))
-
-    graph.draw_text("トラッシュ", (710, 120))
-    graph.draw_rectangle((670, 130), (750, 10))
-
-    graph.draw_text("山札", (710, 270))
-    graph.draw_rectangle((670, 280), (750, 150))
+    graph = graph_(window)
 
     dragging = False
     start_point = end_point = prior_rect = None
@@ -129,6 +131,7 @@ def main():
 
         if event == "Reset":
             graph.erase()
+            graph = graph_(window)
             deck, deck_list = start(graph, deck_copy, deck_list_copy)
 
         if event == "Shuffle":
