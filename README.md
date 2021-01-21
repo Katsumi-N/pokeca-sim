@@ -1,10 +1,10 @@
-Name
+pokeca-sim
 ====
 
 Overview
 
 ## Description
-ポケモンカードのシミュレーターです. 
+ポケモンカードの一人回し用シミュレーターです. 
 デッキコードから公式サイトの画像をダウンロードし, シミュレーターで一人回しができます. 
 
 ## Demo
@@ -13,6 +13,8 @@ Overview
 ## Install
 
 `pip install -r requirements.txt`
+で関連ライブラリをインストールできます。
+そのうちexeファイルも追加します
 
 ## Author
 
