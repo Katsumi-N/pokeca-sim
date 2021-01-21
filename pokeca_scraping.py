@@ -8,8 +8,9 @@ import io
 import os
 
 
+# driver_dir にはchoromedriver
 
-def scraping(deck_code="kVVF5w-bueC8Z-FFVvkF", driver_dir):
+def scraping(deck_code="kVVF5w-bueC8Z-FFVvkF", driver_dir=r"C:\\Users\\naya-\\Anaconda3\\envs\\rl\\Lib\\site-packages\\chromedriver_binary\\chromedriver.exe"):
     # deck_code = "kVVF5w-bueC8Z-FFVvkF/"
     options = Options()
     options.set_headless(True)
@@ -24,7 +25,7 @@ def scraping(deck_code="kVVF5w-bueC8Z-FFVvkF", driver_dir):
     # URLからデッキを読み込む
     deck = {}
     deck_list = []
-    deck_img = {}
+
     base_url = "https://www.pokemon-card.com"
     for i in range(1,5):
         for j in range(1,16):
@@ -36,7 +37,7 @@ def scraping(deck_code="kVVF5w-bueC8Z-FFVvkF", driver_dir):
                 type_ = soup.select("#cardImagesView > div:nth-child("+str(j)+") > div:nth-child("+ str(i) +") > table > tbody > tr.imgBlockArea > td > a")[0].img["src"].split("/")[6].split("_")[1]
                 for _ in range(num):
                     deck_list.append(card)
-                deck[card] = [num,type_]
+
                 img_url = base_url + soup.select("#cardImagesView > div:nth-child("+str(j)+") > div:nth-child("+ str(i) +") > table > tbody > tr.imgBlockArea > td > a")[0].img["src"]
                 img = Image.open(io.BytesIO(requests.get(img_url).content))
                 img_name = "pokeca_img/img_{}.png".format(card)
@@ -45,8 +46,9 @@ def scraping(deck_code="kVVF5w-bueC8Z-FFVvkF", driver_dir):
                     plt.axis("off")
                     plt.imshow(img)
                     plt.savefig(img_name, bbox_inches="tight", pad_inches=0.0)
-                deck_img[card] = img_name
+                deck[card] = [num, type_, img_name]
+
             except:
                 continue
     
-    return deck, deck_list, deck_img
+    return deck, deck_list
