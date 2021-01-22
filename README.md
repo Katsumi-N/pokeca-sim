@@ -16,6 +16,8 @@ Overview
 で関連ライブラリをインストールできます。
 そのうちexeファイルも追加します
 
+## Usage
+`python simulate.py --deck_code=xx8Ycc-z91o6X-J8xxx8 --driver_dir="(path to choromedriver)"`
 ## Author
 
 [Katsumi-N](https://github.com/Katsumi-N)
