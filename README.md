@@ -8,7 +8,7 @@ Overview
 デッキコードから公式サイトの画像をダウンロードし, シミュレーターで一人回しができます. 
 
 ## Demo
-https://user-images.githubusercontent.com/61781055/105462051-707b9680-5cd1-11eb-8c14-26e2142b2ab8.mp4
+![pokeca_sim](https://user-images.githubusercontent.com/61781055/105462937-b8e78400-5cd2-11eb-86c9-f60d95dcb42d.gif)
 ・シャッフル
 ・ドロー
 ・デッキ確認
@@ -23,6 +23,7 @@ https://user-images.githubusercontent.com/61781055/105462051-707b9680-5cd1-11eb-
 
 ## Usage
 `python simulate.py --deck_code=xx8Ycc-z91o6X-J8xxx8 --driver_dir="(path to choromedriver)"`
+windows環境のみdriver_dirの指定が必要なようです
 ## Author
 
 [Katsumi-N](https://github.com/Katsumi-N)
