@@ -2,12 +2,13 @@
 # Qiita "PySimpleGUIの基本的な使用方法"https://qiita.com/KatsunoriNakamura/items/376da645e52f7ef7f9ef
 # Trinket "Graph Element" https://pysimplegui.trinket.io/demo-programs#/graph-element/graph-element-drawing-and-dragging
 import argparse
+import copy
 import PySimpleGUI as sg
 import random
 from pokeca_scraping import scraping
 
 def start(graph, deck_copy, deck_list_copy):
-    deck = deck_copy.copy()
+    deck = copy.deepcopy(deck_copy)
     deck_list = deck_list_copy[:]
     random.shuffle(deck_list)
 
@@ -99,7 +100,7 @@ def main():
 
     #デッキ(キーが名前、値が枚数)とデッキリスト(リスト)のコピーを作成
     deck_list_copy = deck_list[:]
-    deck_copy = deck.copy()
+    deck_copy = copy.deepcopy(deck)
 
     deck, deck_list = start(graph, deck_copy, deck_list_copy)
 
@@ -133,7 +134,7 @@ def main():
             graph.erase()
             graph = graph_(window)
             deck, deck_list = start(graph, deck_copy, deck_list_copy)
-
+            print(deck_copy)
         if event == "Shuffle":
             shuffle(deck_list)
 
